@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Sign Up - Details</h2>
+        <div id="message" class="text-center font-weight-bold"></div>
+        <form id="detailsForm">
+            <input type="text" class="form-control mb-3" id="name" placeholder="Full Name">
+            <input type="email" class="form-control mb-3" id="email" placeholder="Email">
+            <input type="text" class="form-control mb-3" id="phone" placeholder="Phone Number">
+            <button type="button" class="btn btn-primary btn-block" onclick="goToPasswordPage()">Next</button>
+        </form>
+    </div>
+
+    <script>
+        function goToPasswordPage() {
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const messageElement = document.getElementById("message");
+
+            messageElement.innerText = ""; 
+            messageElement.style.color = "red";
+
+           
+            if (!name) {
+                messageElement.innerText = "Please enter your full name.";
+                return;
+            }
+            if (name.length < 5) {
+                messageElement.innerText = "Name must be at least 5 characters long.";
+                return;
+            }
+
+            if (!email) {
+                messageElement.innerText = "Please enter your email.";
+                return;
+            }
+            if (!email.includes("@")) {
+                messageElement.innerText = "Please enter a valid email address.";
+                return;
+            }
+
+            if (!phone) {
+                messageElement.innerText = "Please enter your phone number.";
+                return;
+            }
+            if (!/^\d{10}$/.test(phone) || phone === "1234567890") {
+                messageElement.innerText = "Please enter a valid 10-digit phone number.";
+                return;
+            }
+
+
+           
+            localStorage.setItem('name', name);
+            localStorage.setItem('email', email);
+            localStorage.setItem('phone', phone);
+
+            
+            window.location.href = 'password.html';
+        }
+    </script>
+</body>
+</html>
